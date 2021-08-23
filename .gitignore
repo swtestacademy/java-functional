@@ -21,11 +21,10 @@
 *.idea
 *.iml
 target
-.idea
 .iml
 .lib
 target
-extent-reports
+.idea
 
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
