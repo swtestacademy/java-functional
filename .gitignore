@@ -22,7 +22,6 @@
 *.iml
 target
 .idea
-idea
 .iml
 .lib
 target
