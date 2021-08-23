@@ -4,21 +4,24 @@ import org.junit.jupiter.api.Test;
 
 public class CarTest {
 
-    Car tesla = new Tesla();
-    Car porsche = new Porsche();
+    Car tesla    = new Tesla();
+    Car porsche  = new Porsche();
     Car mercedes = new Mercedes();
 
     @Test
     public void cartTest() {
-        System.out.println("Testing Tesla!\n-------------------");
+        tesla.setName("Tesla");
+        System.out.println("\nTesting " +  tesla.getName() + "!\n-------------------");
         tesla.speedUp();
         tesla.consumeEnergy();
 
-        System.out.println("\nTesting Porsche!\n-------------------");
+        porsche.setName("Porsche");
+        System.out.println("\nTesting " +  porsche.getName() + "!\n-------------------");
         porsche.speedUp();
         porsche.consumeEnergy();
 
-        System.out.println("\nTesting Mercedes!\n-------------------");
+        mercedes.setName("Mercedes");
+        System.out.println("\nTesting " +  mercedes.getName() + "!\n-------------------");
         mercedes.speedUp();
         mercedes.consumeEnergy();
     }
