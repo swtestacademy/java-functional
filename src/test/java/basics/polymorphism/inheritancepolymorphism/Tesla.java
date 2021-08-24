@@ -1,4 +1,4 @@
-package basics.polymorphism.inheritance;
+package basics.polymorphism.inheritancepolymorphism;
 
 public class Tesla extends Car {
     @Override

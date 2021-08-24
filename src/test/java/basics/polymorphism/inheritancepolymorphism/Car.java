@@ -1,4 +1,4 @@
-package basics.polymorphism.inheritance;
+package basics.polymorphism.inheritancepolymorphism;
 
 import lombok.Getter;
 import lombok.Setter;
