@@ -2,7 +2,7 @@ package basics.polymorphism.interfacepolymorphism;
 
 import org.junit.jupiter.api.Test;
 
-public class CarTest {
+public class EngineTest {
 
     Tesla    tesla    = new Tesla();
     Mercedes mercedes = new Mercedes();
