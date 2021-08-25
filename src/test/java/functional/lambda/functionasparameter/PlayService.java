@@ -1,7 +1,7 @@
-package functional.lambda.functionalinterface;
+package functional.lambda.functionasparameter;
 
 //SAM: Single Abstract Method (Functional Interface annotation dictates that this interface has single abstract method.)
 @FunctionalInterface
-public interface PlayMusicService {
-    void run(String song);
+public interface PlayService {
+    void run(String name, double duration, boolean repeat);
 }
