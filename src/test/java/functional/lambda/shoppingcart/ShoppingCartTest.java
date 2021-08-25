@@ -26,7 +26,8 @@ public class ShoppingCartTest {
     }
 
     @Test
-    public void shoppingCartTest() {
+    public void shoppingCartTest1() {
+        System.out.println("Shopping Cart Test 1! Function as parameter!");
         action(addItem, "Item has been added!", true);
         action(addItem, "Item has been added!", true);
         action(addItem, "Item has been added!", true);
@@ -38,5 +39,23 @@ public class ShoppingCartTest {
         action(addItem, "Item has been added!", true);
         action(addItem, "Item has been added!", true);
         action(deleteCart, "Cart has been deleted!", false);
+        System.out.println("--------------------------------------------");
+    }
+
+    @Test
+    public void shoppingCartTest2() {
+        System.out.println("Shopping Cart Test 2! Direct lambda function call!");
+        addItem.apply("Item has been added!", true);
+        addItem.apply( "Item has been added!", true);
+        addItem.apply( "Item has been added!", true);
+        deleteItem.apply("Item has been deleted!", true);
+        deleteItem.apply("Item has been deleted!", true);
+        deleteCart.apply("Cart has been deleted!", false);
+        addItem.apply("Item has been added!", true);
+        deleteItem.apply("Item has been deleted!", true);
+        addItem.apply("Item has been added!", true);
+        addItem.apply("Item has been added!", true);
+        deleteCart.apply("Cart has been deleted!", false);
+        System.out.println("--------------------------------------------");
     }
 }
