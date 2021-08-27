@@ -1,4 +1,4 @@
-package functional.lambda.functionalinterface;
+package functional.lambda.customfunctionalinterface;
 
 import org.junit.jupiter.api.Test;
 
