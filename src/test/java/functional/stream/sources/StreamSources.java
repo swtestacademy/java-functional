@@ -1,4 +1,4 @@
-package functional.stream;
+package functional.stream.sources;
 
 import java.util.ArrayList;
 import java.util.Arrays;
