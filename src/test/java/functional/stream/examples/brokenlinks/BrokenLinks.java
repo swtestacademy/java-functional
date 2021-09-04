@@ -28,10 +28,11 @@ public class BrokenLinks {
     public void swTestAcademyHomePageBrokenLinksTest1() {
         driver.findElements(By.tagName("a"))
             .stream()
-            .limit(3)
-            .map(element -> element.getAttribute("href"))
-            .filter(link -> !link.isEmpty()) //filter the non-empty links.
-            .distinct() //remove duplicate links
+            .parallel() //For parallel execution to process faster.
+            .limit(3) //Do the operation for first 3 elements.
+            .map(element -> element.getAttribute("href")) //Get the links.
+            .filter(link -> !link.isEmpty()) //Filter the non-empty links.
+            .distinct() //Remove duplicate links.
             .forEach(link -> System.out.println("Response Code: " + HTTPConnectionUtil.getResponseCode(link) + " Link: " + link));
     }
 
@@ -39,6 +40,7 @@ public class BrokenLinks {
     public void swTestAcademyHomePageBrokenLinksTest2() {
         long count = driver.findElements(By.tagName("a"))
             .stream()
+            .parallel()
             .limit(3)
             .map(element -> element.getAttribute("href"))
             .filter(link -> !link.isEmpty()) //filter the non-empty links.
@@ -54,6 +56,7 @@ public class BrokenLinks {
     public void swTestAcademyHomePageBrokenLinksTest3() {
         boolean result = driver.findElements(By.tagName("a"))
             .stream()
+            .parallel()
             .limit(3)
             .map(element -> element.getAttribute("href"))
             .filter(link -> !link.isEmpty()) //filter the non-empty links.
@@ -68,6 +71,7 @@ public class BrokenLinks {
     public void swTestAcademyHomePageBrokenLinksTest4() {
         List<String> brokenLinkList = driver.findElements(By.tagName("a"))
             .stream()
+            .parallel()
             .limit(3)
             .map(element -> element.getAttribute("href"))
             .filter(link -> !link.isEmpty()) //filter the non-empty links.

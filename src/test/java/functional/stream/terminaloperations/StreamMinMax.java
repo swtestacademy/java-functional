@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +23,12 @@ public class StreamMinMax {
         numbers.add(8);
         numbers.add(9);
         numbers.add(10);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        numbers.clear();
+        System.out.println("");
     }
 
     /**

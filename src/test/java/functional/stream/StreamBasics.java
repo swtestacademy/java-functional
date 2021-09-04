@@ -2,6 +2,7 @@ package functional.stream;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -62,5 +63,15 @@ public class StreamBasics {
         //.forEach(number -> System.out.println("Result of stream: " + number)); //Print the results.
         //Note: Streams need terminal operations! forEach, collect, count, max, min, findAny, anyMatch, noneMatch, etc.
         System.out.println("Stream operations finished!");
+    }
+
+    @Test
+    public void streamReUsabilityTest() {
+        Stream<Integer> numbersStream = numbers.stream()
+            .filter(number -> number % 2 == 1) //Filter the odd numbers.
+            .map(number -> number * 2);
+
+        numbersStream.forEach(System.out::println);
+        numbersStream.forEach(System.out::println); //Here we cannot reuse the stream again!!!
     }
 }
