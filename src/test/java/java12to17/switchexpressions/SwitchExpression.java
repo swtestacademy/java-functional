@@ -12,16 +12,22 @@ import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.TestMethodOrder;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SwitchExpression {
     private Map<Integer, Position> positionMap = new HashMap<>();
     private int                    randomNumber;
     private Position               randomPosition;
 
     @BeforeEach
-    public void setup() {
+    public void setup(TestInfo testInfo) {
+        if (!testInfo.getDisplayName().contains("repetition")) System.out.println("\nTest name: " + testInfo.getDisplayName());
         positionMap.put(1, GOALKEEPER);
         positionMap.put(2, DEFENCE);
         positionMap.put(3, MIDFIELDER);
@@ -37,6 +43,7 @@ public class SwitchExpression {
 
     @Test
     @RepeatedTest(5)
+    @Order(1)
     public void oldSwitchExpressionTest() {
         switch (randomPosition) {
             case GOALKEEPER:
@@ -66,6 +73,7 @@ public class SwitchExpression {
      */
     @Test
     @RepeatedTest(5)
+    @Order(2)
     public void newSwitchExpressionTest() {
         switch (randomPosition) {
             case GOALKEEPER -> System.out.println("Buffon");
@@ -81,6 +89,7 @@ public class SwitchExpression {
      */
     @Test
     @RepeatedTest(5)
+    @Order(3)
     public void newSwitchExpressionWithAssignmentTest() {
         String footballer = switch (randomPosition) {
             case GOALKEEPER, DEFENCE -> {
