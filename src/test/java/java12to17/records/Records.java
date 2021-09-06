@@ -3,21 +3,19 @@ package java12to17.records;
 import org.junit.jupiter.api.Test;
 
 /**
- * Records reduce boilerplate code for classes that are simple data carriers:
+ * Records reduce boilerplate code for classes that are simple data carriers.
+ * They are immutable (since their fields are private and final).
+ * They are implicitly final.
+ * We cannot define additional instance fields.
+ * They always extend the Record class.
  */
 public class Records {
-
     /**
      * With below record declaration, we automatically define:
      * Private final fields for age, name, and team.
      * Canonical constructors for all fields.
      * Getters for all fields.
      * equals, hashCode, and toString for all fields.
-     * <p>
-     * Records are immutable (since their fields are private and final).
-     * They are implicitly final.
-     * We cannot define additional instance fields.
-     * Always extend the Record class.
      */
     record Footballer(String name, int age, String team) {
     }
