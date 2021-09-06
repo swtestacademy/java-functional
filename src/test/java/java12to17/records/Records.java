@@ -1,5 +1,6 @@
 package java12to17.records;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -71,11 +72,13 @@ public class Records {
                 return this.age;
             }
         }
+
         Engineer engineer1 = new Engineer("Onur", 39);
         System.out.println(engineer1);
+        Assertions.assertEquals("ONUR", engineer1.name);
 
-        Engineer engineer2 = new Engineer("Alex", 0);
-        System.out.println(engineer2);
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> new Engineer("Alex", 0));
+        Assertions.assertEquals("Age less than 1 is not allowed!", exception.getMessage());
     }
 
 }
