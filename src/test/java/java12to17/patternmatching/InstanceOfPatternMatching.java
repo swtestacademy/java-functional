@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 
 public class InstanceOfPatternMatching {
-
     /**
      * Pattern matching for instanceof performing casts after type comparisons.
      * The scope of the variable str is limited to the if branch.
