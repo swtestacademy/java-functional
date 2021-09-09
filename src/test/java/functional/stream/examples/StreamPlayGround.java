@@ -1,7 +1,12 @@
 package functional.stream.examples;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
@@ -16,26 +21,25 @@ import org.junit.jupiter.api.TestMethodOrder;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class StreamPlayGround {
     List<Integer> numbers = new ArrayList<>();
+    List<String>  names   = new ArrayList<>();
 
     @BeforeEach
     public void setup(TestInfo testInfo) {
         System.out.println("Test name: " + testInfo.getDisplayName());
-        numbers.add(5);
-        numbers.add(8);
-        numbers.add(3);
-        numbers.add(7);
-        numbers.add(2);
-        numbers.add(6);
-        numbers.add(1);
-        numbers.add(10);
-        numbers.add(9);
-        numbers.add(4);
     }
 
     @AfterEach
     public void tearDown() {
-        numbers.clear();
         System.out.println("");
+    }
+
+    private void populateNumbers() {
+        Collections.addAll(numbers, 5, 8, 3, 7, 2, 6, 1, 10, 9, 4);
+    }
+
+    @SneakyThrows
+    private void populateNames() {
+        names = Files.readAllLines(Paths.get(ClassLoader.getSystemResource("names.txt").getPath()));
     }
 
     /**
@@ -53,6 +57,7 @@ public class StreamPlayGround {
     @Test
     @Order(1)
     public void streamPeekFilterLimitSkipMapTest() {
+        populateNumbers(); //Prepare test data.
         numbers.stream()
             .filter(number -> number % 2 == 1) //Filter the odd numbers
             .filter(number -> number > 2)
@@ -63,5 +68,31 @@ public class StreamPlayGround {
             .map(number -> number * 2) //Transform the number to number*2
             .skip(1) //Skip first 1 elements.
             .forEach(number -> System.out.println("Result of stream: " + number)); //Print the results.
+        numbers.clear(); //Clear test data.
+    }
+
+    @Test
+    @Order(2)
+    public void namesTest() {
+        populateNames(); //Prepare test data.
+
+        //Calculate Count of names which are starting with A
+        System.out.println("Count of names which are starting with \"A\": " + names.stream()
+            .filter(names -> names.startsWith("A"))
+            .count());
+
+        //Print the upper-case version for the names which are starting with A.
+        names.stream()
+            .filter(names -> names.startsWith("A"))
+            .map(String::toUpperCase)
+            .forEach(System.out::println);
+
+        //Find the longest name and print it.
+        names.stream()
+            .skip(1)
+            .max(Comparator.comparing(String::length))
+            .ifPresent(name -> System.out.println("Longest Name length is: " + name.length() + " and the name is: " + name));
+
+        names.clear(); //Clear test data.
     }
 }
