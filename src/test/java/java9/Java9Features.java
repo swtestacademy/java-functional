@@ -68,7 +68,7 @@ public class Java9Features {
     }
 
     /**
-     * Immutable Set: Set.of() declaration creates a set which is an immutable (constant) set
+     * Immutable Set: Set.of() declaration creates a set which is an immutable (constant) set.
      */
     @Test
     @Order(4)
@@ -81,7 +81,7 @@ public class Java9Features {
     }
 
     /**
-     * Immutable Map:
+     * Immutable Map: Map.of() declaration creates a map which is an immutable (constant) map.
      */
     @Test
     @Order(5)
