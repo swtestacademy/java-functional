@@ -4,7 +4,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 public class ReferenceTypeExample {
-
     @Test
     public void referenceTypeExample() {
         int[] myArr = new int[] { 4, 5 };

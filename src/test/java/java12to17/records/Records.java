@@ -18,8 +18,7 @@ public class Records {
      * Getters for all fields.
      * equals, hashCode, and toString for all fields.
      */
-    record Footballer(String name, int age, String team) {
-    }
+    record Footballer(String name, int age, String team) { }
 
     //Canonical Constructor
     Footballer footballer = new Footballer("Ronaldo", 36, "Manchester United");
@@ -30,15 +29,16 @@ public class Records {
         System.out.println("Footballer's name: " + footballer.name);
         System.out.println("Footballer's age: " + footballer.age);
 
-        record Basketballer(String name, int age) {
-        }
+        record Basketballer(String name, int age) { }
 
         // equals
         boolean isFootballer1 = footballer.equals(new Footballer("Ozil", 32, "Fenerbahce")); // false
         System.out.println("Is first one footballer? " + isFootballer1);
+
         boolean isFootballer2 = footballer.equals(new Basketballer("Lebron", 36)); // false
         System.out.println("Is second one footballer? " + isFootballer2);
-        boolean isFootballer3 = footballer.equals(new Footballer("Ronaldo", 36, "Manchester United")); // false
+
+        boolean isFootballer3 = footballer.equals(new Footballer("Ronaldo", 36, "Manchester United")); // true
         System.out.println("Is third one footballer? " + isFootballer3);
 
         //hashcode

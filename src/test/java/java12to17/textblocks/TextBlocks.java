@@ -3,7 +3,6 @@ package java12to17.textblocks;
 import org.junit.jupiter.api.Test;
 
 public class TextBlocks {
-
     /**
      * A text block is opened by three double quotes """ followed by a line break, and closed by three double-quotes.
      */

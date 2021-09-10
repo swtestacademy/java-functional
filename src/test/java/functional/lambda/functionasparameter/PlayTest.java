@@ -1,7 +1,6 @@
 package functional.lambda.functionasparameter;
 
 public class PlayTest {
-
     public static void main(String[] args) {
         //Function definition
         PlayService playIt = (name, duration, repeat) ->

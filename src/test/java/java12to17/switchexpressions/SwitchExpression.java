@@ -15,7 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestMethodOrder;
 
@@ -41,7 +40,6 @@ public class SwitchExpression {
         positionMap.clear();
     }
 
-    @Test
     @RepeatedTest(5)
     @Order(1)
     public void oldSwitchExpressionTest() {
@@ -71,7 +69,6 @@ public class SwitchExpression {
      * Makes variables defined inside a case branch local to this branch.
      * A “default” branch has to be provided.
      */
-    @Test
     @RepeatedTest(5)
     @Order(2)
     public void newSwitchExpressionTest() {
@@ -87,7 +84,6 @@ public class SwitchExpression {
     /**
      * If the right-hand side of a single case requires more code, it can be written inside a block, and the value returned using yield.
      */
-    @Test
     @RepeatedTest(5)
     @Order(3)
     public void newSwitchExpressionWithAssignmentTest() {

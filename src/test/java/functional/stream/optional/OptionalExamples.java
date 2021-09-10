@@ -4,7 +4,6 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 public class OptionalExamples {
-
     private Optional<String> returnNullMessage() {
         return Optional.ofNullable(null);
     }

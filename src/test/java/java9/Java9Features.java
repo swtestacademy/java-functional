@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 /**
- * Some JAVA 9 Features: TakeWhile, DropWhile, Immutable List, Immutable Set, Immutable Map
+ * New JAVA 9 Features: TakeWhile, DropWhile, Immutable List, Immutable Set, Immutable Map, List.of(), Set.of(), Map.of() examples.
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class Java9Features {

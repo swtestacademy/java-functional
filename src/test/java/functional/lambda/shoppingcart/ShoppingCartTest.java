@@ -3,7 +3,6 @@ package functional.lambda.shoppingcart;
 import org.junit.jupiter.api.Test;
 
 public class ShoppingCartTest {
-
     int itemCount = 0;
 
     CartAction addItem = (message, status) -> {

@@ -3,7 +3,6 @@ package basics.datatypes;
 import org.junit.jupiter.api.Test;
 
 public class PrimitiveTypeExample {
-
     @Test
     public void primitiveTypeExample() {
         int a = 8;

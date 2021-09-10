@@ -6,7 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public abstract class Car {
-
     private String name = null;
 
     public void speedUp() {

@@ -3,7 +3,6 @@ package basics.boxingunboxing;
 import org.junit.jupiter.api.Test;
 
 public class BoxingUnBoxing {
-
     @Test
     public void boxingUnBoxing() {
         //Boxing

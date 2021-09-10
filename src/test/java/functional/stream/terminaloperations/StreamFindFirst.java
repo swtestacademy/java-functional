@@ -13,6 +13,7 @@ public class StreamFindFirst {
 
     @BeforeEach
     public void setup() {
+        //Another method: Collections.addAll(numbers, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         numbers.add(1);
         numbers.add(2);
         numbers.add(3);

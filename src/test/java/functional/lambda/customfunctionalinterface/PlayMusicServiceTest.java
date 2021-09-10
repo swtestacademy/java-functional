@@ -3,7 +3,6 @@ package functional.lambda.customfunctionalinterface;
 import org.junit.jupiter.api.Test;
 
 public class PlayMusicServiceTest {
-
     @Test
     public void playMusicWithoutLambdaTest(){
         PlayMusicService playIt = new PlayMusicService() {

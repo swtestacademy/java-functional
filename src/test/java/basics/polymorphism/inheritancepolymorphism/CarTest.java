@@ -3,7 +3,6 @@ package basics.polymorphism.inheritancepolymorphism;
 import org.junit.jupiter.api.Test;
 
 public class CarTest {
-
     Car tesla    = new Tesla();
     Car porsche  = new Porsche();
     Car mercedes = new Mercedes();
