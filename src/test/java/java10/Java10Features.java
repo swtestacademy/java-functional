@@ -52,7 +52,7 @@ public class Java10Features {
             .map(number -> number*number)
             .collect(Collectors.toList());
         list3.add(5);
-        
+
         Assertions.assertTrue(list3.contains(5));
     }
 }
