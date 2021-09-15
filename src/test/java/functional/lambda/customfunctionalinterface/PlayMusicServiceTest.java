@@ -16,7 +16,7 @@ public class PlayMusicServiceTest {
 
     @Test
     public void playMusicWithLambdaTest(){
-        PlayMusicService playIt = (song) -> System.out.println("First playing: "+ song);
+        PlayMusicService playIt = (song) -> System.out.println("First playing: "+ song); //Lambda Declaration
 
         playIt.run("Despacito");
     }
