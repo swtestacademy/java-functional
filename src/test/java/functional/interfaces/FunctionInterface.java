@@ -1,12 +1,20 @@
 package functional.interfaces;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.TestMethodOrder;
 
 /**
  * Function takes an input, it returns defined type.
  * It is like a function with parameter, with a return type. First param is input, second is return type.
  */
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class FunctionInterface {
     //FunctionInterface function declarations.
     Function<String, String>  toUpperCase = (text) -> text.toUpperCase();
@@ -18,6 +26,20 @@ public class FunctionInterface {
     Function<String, String>  toLowerCaseMR = String::toLowerCase;
     Function<Integer, Double> log10MR       = Math::log10;
 
+    //BiFunction Example
+    BiFunction<Integer, Integer, Integer> powerOf = (base, power) -> (int) Math.pow(base, power);
+
+    @BeforeEach
+    public void setup(TestInfo testInfo) {
+        System.out.println("Test name: " + testInfo.getDisplayName());
+    }
+
+    @AfterEach
+    public void tearDown(){
+        System.out.println();
+    }
+
+    @Order(1)
     @Test
     public void functionTest() {
         //Calling functions.
@@ -28,6 +50,7 @@ public class FunctionInterface {
         System.out.println(log10Result);
     }
 
+    @Order(2)
     @Test
     public void functionChainWithAndThen() {
         //Function chaining. First do the first function then do the second one.
@@ -38,6 +61,7 @@ public class FunctionInterface {
         System.out.println(chainResult2);
     }
 
+    @Order(3)
     @Test
     public void functionChainWithCompose() {
         //Function chaining. First do the second function then do the first one. Vise versa of andThen.
@@ -48,4 +72,11 @@ public class FunctionInterface {
         System.out.println(chainResult2);
     }
 
+    @Order(4)
+    @Test
+    public void biFunctionTest() {
+        //Calling functions.
+        int result = powerOf.apply(3, 2);
+        System.out.println("Power of 3 over 2 is: " + result);
+    }
 }

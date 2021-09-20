@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
  */
 public class CallableInterface {
     //Callable function declarations.
-    Callable<Double> callFunction = () -> Math.random()*100;
-    Supplier<Double> supplierFunction = () -> Math.random()*100;
+    Callable<Double> callFunction     = () -> Math.random() * 100;
+    Supplier<Double> supplierFunction = () -> Math.random() * 100;
 
     @SneakyThrows
     @Test
