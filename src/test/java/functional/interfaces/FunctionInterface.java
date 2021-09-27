@@ -2,6 +2,7 @@ package functional.interfaces;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
@@ -16,18 +17,21 @@ import org.junit.jupiter.api.TestMethodOrder;
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class FunctionInterface {
-    //FunctionInterface function declarations.
+    //FunctionInterface function declarations. (Input Type, Return Type)
     Function<String, String>  toUpperCase = (text) -> text.toUpperCase();
     Function<String, String>  toLowerCase = (text) -> text.toLowerCase();
     Function<Integer, Double> log10       = (number) -> Math.log10(number);
 
-    //Method Reference Declarations
+    //Method Reference Declarations (Input Type, Return Type)
     Function<String, String>  toUpperCaseMR = String::toUpperCase;
     Function<String, String>  toLowerCaseMR = String::toLowerCase;
     Function<Integer, Double> log10MR       = Math::log10;
 
-    //BiFunction Example
+    //BiFunction Example (Input Type, Input Type, Return Type)
     BiFunction<Integer, Integer, Integer> powerOf = (base, power) -> (int) Math.pow(base, power);
+
+    //UnaryOperator Example (Input and Return type are same.)
+    UnaryOperator<String> appendText = (text) -> "I am appending: " + text;
 
     @BeforeEach
     public void setup(TestInfo testInfo) {
@@ -78,5 +82,12 @@ public class FunctionInterface {
         //Calling functions.
         int result = powerOf.apply(3, 2);
         System.out.println("Power of 3 over 2 is: " + result);
+    }
+
+    @Order(5)
+    @Test
+    public void unaryOperatorTest(){
+        //Calling UnaryOperator
+        System.out.println(appendText.apply("Hello SW Test Academy!"));
     }
 }
