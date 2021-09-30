@@ -136,4 +136,32 @@ public class OptionalExamples {
         returnEmptyMessage().ifPresentOrElse(message -> System.out.println("The Message is: " + message), runnable);
         returnCustomMessage().ifPresentOrElse(message -> System.out.println("The Message is: " + message), runnable);
     }
+
+    @Test
+    @Order(10)
+    public void optionalMapExample() {
+        Optional<Integer> optional1 = Optional.empty();
+        optional1
+            .map(num -> Math.pow(num, 3))
+            .ifPresent(System.out::println);
+
+        Optional<Integer> optional2 = Optional.of(2);
+        optional2
+            .map(num -> Math.pow(num, 3))
+            .ifPresent(System.out::println);
+    }
+
+    @Test
+    @Order(11)
+    public void optionalFilterExample() {
+        Optional<String> optional1 = Optional.empty();
+        optional1
+            .filter(text -> text.length() > 3)
+            .ifPresent(System.out::println);
+
+        Optional<String> optional2 = Optional.of("SW Test Academy!");
+        optional2
+            .filter(text -> text.contains("SW Test Academy"))
+            .ifPresent(System.out::println);
+    }
 }
