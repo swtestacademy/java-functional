@@ -2,10 +2,28 @@ package functional.stream.optional;
 
 import java.util.Optional;
 import java.util.function.Supplier;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.TestMethodOrder;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class OptionalExamples {
+    @BeforeEach
+    public void setup(TestInfo testInfo) {
+        System.out.println("Test name: " + testInfo.getDisplayName());
+
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.out.println();
+    }
+
     private Optional<String> returnNullMessage() {
         return Optional.ofNullable(null);
     }
@@ -30,6 +48,7 @@ public class OptionalExamples {
     private final Runnable runnable = () -> System.out.println("Value is null or empty!");
 
     @Test
+    @Order(1)
     public void isPresentTest() {
         String result1 = returnNullMessage().isPresent() ? returnNullMessage().get() : "Value is null or empty!";
         String result2 = returnEmptyMessage().isPresent() ? returnEmptyMessage().get() : "Value is null or empty!";
@@ -40,6 +59,7 @@ public class OptionalExamples {
     }
 
     @Test
+    @Order(2)
     public void isEmptyTest() {
         String result1 = returnNullMessage().isEmpty() ? "Value is null or empty!" : returnNullMessage().get();
         String result2 = returnEmptyMessage().isEmpty() ? "Value is null or empty!" : returnEmptyMessage().get();
@@ -50,6 +70,7 @@ public class OptionalExamples {
     }
 
     @Test
+    @Order(3)
     public void orTest() {
         Optional<String> result1 = returnNullMessage().or(optionalTextSupplier);
         Optional<String> result2 = returnEmptyMessage().or(optionalTextSupplier);
@@ -58,7 +79,8 @@ public class OptionalExamples {
     }
 
     @Test
-    public void orElseTest1() {
+    @Order(4)
+    public void orElseTest() {
         String result1 = returnNullMessage().orElse(customMessageSupplier.get());
         String result2 = returnEmptyMessage().orElse(customMessageSupplier.get());
         System.out.println(result1);
@@ -66,6 +88,7 @@ public class OptionalExamples {
     }
 
     @Test
+    @Order(5)
     public void orElseGetTest() {
         String result1 = returnNullMessage().orElseGet(customMessageSupplier);
         String result2 = returnEmptyMessage().orElseGet(customMessageSupplier);
@@ -79,6 +102,7 @@ public class OptionalExamples {
      * function in below example. This is of the main difference between orElse() and orElseGet().
      */
     @Test
+    @Order(6)
     public void orElse_vs_OrElseGet_Test() {
         System.out.println("orElse() Test Starting!");
         String orElseResult = returnCustomMessage().orElse(anotherTextSupplier.get());
@@ -90,6 +114,7 @@ public class OptionalExamples {
     }
 
     @Test
+    @Order(7)
     public void orElseThrow() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> returnNullMessage().orElseThrow(IllegalArgumentException::new));
         Assertions.assertThrows(IllegalArgumentException.class, () -> returnEmptyMessage().orElseThrow(IllegalArgumentException::new));
@@ -97,6 +122,7 @@ public class OptionalExamples {
     }
 
     @Test
+    @Order(8)
     public void ifPresent() {
         returnNullMessage().ifPresent(message -> System.out.println("The Message is: " + message));
         returnEmptyMessage().ifPresent(message -> System.out.println("The Message is: " + message));
@@ -104,6 +130,7 @@ public class OptionalExamples {
     }
 
     @Test
+    @Order(9)
     public void ifPresentOrElseTest() {
         returnNullMessage().ifPresentOrElse(message -> System.out.println("The Message is: " + message), runnable);
         returnEmptyMessage().ifPresentOrElse(message -> System.out.println("The Message is: " + message), runnable);
