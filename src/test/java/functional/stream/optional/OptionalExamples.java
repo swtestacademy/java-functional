@@ -74,8 +74,10 @@ public class OptionalExamples {
     public void orTest() {
         Optional<String> result1 = returnNullMessage().or(optionalTextSupplier);
         Optional<String> result2 = returnEmptyMessage().or(optionalTextSupplier);
+        Optional<String> result3 = returnCustomMessage().or(optionalTextSupplier);
         System.out.println(result1);
         System.out.println(result2);
+        System.out.println(result3);
     }
 
     @Test
@@ -141,10 +143,12 @@ public class OptionalExamples {
     @Order(10)
     public void optionalMapExample() {
         Optional<Integer> optional1 = Optional.empty();
+        System.out.println("First Example Starting!");
         optional1
             .map(num -> Math.pow(num, 3))
             .ifPresent(System.out::println);
 
+        System.out.println("Second Example Starting!");
         Optional<Integer> optional2 = Optional.of(2);
         optional2
             .map(num -> Math.pow(num, 3))
@@ -154,11 +158,13 @@ public class OptionalExamples {
     @Test
     @Order(11)
     public void optionalFilterExample() {
+        System.out.println("First Example Starting!");
         Optional<String> optional1 = Optional.empty();
         optional1
             .filter(text -> text.length() > 3)
             .ifPresent(System.out::println);
 
+        System.out.println("Second Example Starting!");
         Optional<String> optional2 = Optional.of("SW Test Academy!");
         optional2
             .filter(text -> text.contains("SW Test Academy"))
