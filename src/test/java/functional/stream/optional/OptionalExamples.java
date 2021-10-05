@@ -16,7 +16,6 @@ public class OptionalExamples {
     @BeforeEach
     public void setup(TestInfo testInfo) {
         System.out.println("Test name: " + testInfo.getDisplayName());
-
     }
 
     @AfterEach

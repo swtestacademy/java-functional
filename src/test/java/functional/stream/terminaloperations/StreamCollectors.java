@@ -1,6 +1,7 @@
 package functional.stream.terminaloperations;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestMethodOrder;
 
 /**
@@ -21,18 +23,10 @@ public class StreamCollectors {
     List<String>  texts   = new ArrayList<>();
 
     @BeforeEach
-    public void setup() {
-        //Another method: Collections.addAll(numbers, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        numbers.add(1);
-        numbers.add(2);
-        numbers.add(3);
-        numbers.add(4);
-        numbers.add(5);
-        numbers.add(6);
-        numbers.add(7);
-        numbers.add(8);
-        numbers.add(9);
-        numbers.add(10);
+    public void setup(TestInfo testInfo) {
+        System.out.println("Test name: " + testInfo.getDisplayName());
+
+        Collections.addAll(numbers, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
         texts.add("Ronaldo");
         texts.add("Messi");
@@ -66,16 +60,9 @@ public class StreamCollectors {
     @Test
     @Order(2)
     public void streamCollectorsToSetNumbersTest() {
-        numbers.add(3);
-        numbers.add(3);
-        numbers.add(2);
-        numbers.add(4);
-        numbers.add(4);
-        numbers.add(1);
-        numbers.add(1);
-        numbers.add(1);
-        numbers.add(6);
-        numbers.add(5);
+        List<Integer> numbers = new ArrayList<>();
+        Collections.addAll(numbers, 3, 3, 2, 4, 4, 1, 1, 6, 5);
+
         System.out.println("Number List: " + numbers);
 
         Set<Integer> numberSet = numbers.stream()
@@ -137,7 +124,7 @@ public class StreamCollectors {
 
         //Group By Last Character
         Map<Character, List<String>> groupByLastCharacter = texts.stream()
-            .collect(Collectors.groupingBy(text -> text.charAt(text.length()-1)));
+            .collect(Collectors.groupingBy(text -> text.charAt(text.length() - 1)));
 
         System.out.println("groupBy Length: " + groupByLength);
         System.out.println("groupBy Contains Character Z: " + groupByContainsCharZ);

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestMethodOrder;
 
 /**
@@ -20,7 +21,9 @@ public class StreamFindAny {
     List<String> texts = new ArrayList<>();
 
     @BeforeEach
-    public void setup() {
+    public void setup(TestInfo testInfo) {
+        System.out.println("Test name: " + testInfo.getDisplayName());
+
         texts.add("Ronaldo");
         texts.add("Messi");
         texts.add("Zlatan");
