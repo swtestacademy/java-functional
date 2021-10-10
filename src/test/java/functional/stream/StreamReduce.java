@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestMethodOrder;
 
 /**
@@ -20,13 +22,19 @@ public class StreamReduce {
     List<Integer> numbers = new ArrayList<>();
 
     @BeforeEach
-    void setup() {
+    void setup(TestInfo testInfo) {
+        System.out.println(testInfo.getDisplayName());
         Collections.addAll(numbers, 1, 2, 3, 4);
+    }
+
+    @AfterEach
+    void teardown() {
+        System.out.println();
     }
 
     /**
      * Reduce helps us to combine elements into one single object.
-     * It is working like an accumulator. Below we calculated sum of numbers.
+     * It is working like an accumulator. Below we calculate sum of numbers.
      */
     @Test
     @Order(1)
@@ -41,15 +49,15 @@ public class StreamReduce {
     }
 
     @Test
-    @Order(2)
-    public void streamReduceFactorialTest() {
+    @Order(1)
+    public void streamReduceParallelSumTest() {
         Instant start = Instant.now();
-        Optional<Integer> sum = numbers.stream()
-            .reduce((a, b) -> a * b);
+        Optional<Integer> sum = numbers.parallelStream()
+            .reduce((a, b) -> a + b);
 
-        sum.ifPresent(result -> System.out.println("Factorial is: " + result));
+        sum.ifPresent(result -> System.out.println("Sum is: " + result));
         Instant end = Instant.now();
-        System.out.println("Elapsed time of streamReduceFactorialTest: " + Duration.between(start, end).toNanos());
+        System.out.println("Elapsed time of streamReduceParallelSumTest: " + Duration.between(start, end).toNanos());
     }
 
     @Test
@@ -59,8 +67,21 @@ public class StreamReduce {
         int sum = numbers.stream()
             .mapToInt(number -> number)
             .sum();
+
         System.out.println("Sum of intStream operation: " + sum);
         Instant end = Instant.now();
         System.out.println("Elapsed time of intStreamSumTest: " + Duration.between(start, end).toNanos());
+    }
+
+    @Test
+    @Order(4)
+    public void streamReduceFactorialTest() {
+        Instant start = Instant.now();
+        Optional<Integer> sum = numbers.stream()
+            .reduce((a, b) -> a * b);
+
+        sum.ifPresent(result -> System.out.println("Factorial is: " + result));
+        Instant end = Instant.now();
+        System.out.println("Elapsed time of streamReduceFactorialTest: " + Duration.between(start, end).toNanos());
     }
 }
