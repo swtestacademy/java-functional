@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestMethodOrder;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -17,8 +19,14 @@ public class PrimitiveStreams {
     List<Integer> numbers = new ArrayList<>();
 
     @BeforeEach
-    void setup() {
+    void setup(TestInfo testInfo) {
+        System.out.println(testInfo.getDisplayName());
         Collections.addAll(numbers, 1, 2, 3, 4);
+    }
+
+    @AfterEach
+    void teardown() {
+        System.out.println();
     }
 
     /**
@@ -42,10 +50,10 @@ public class PrimitiveStreams {
     }
 
     @Test
-    @Order(1)
+    @Order(2)
     public void intStreamRangeTest() {
         Instant start = Instant.now();
-        int sum = IntStream.range(1, 4)
+        int sum = IntStream.range(1, 3)
             .sum();
 
         System.out.println("Sum of intStreamRangeTest operation: " + sum);
@@ -54,7 +62,7 @@ public class PrimitiveStreams {
     }
 
     @Test
-    @Order(1)
+    @Order(3)
     public void intStreamRangeClosedTest() {
         Instant start = Instant.now();
         int sum = IntStream.rangeClosed(1, 4)
