@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestMethodOrder;
 
 /**
@@ -21,7 +22,8 @@ public class Java9Features {
     List<Integer> numbers = new ArrayList<>();
 
     @BeforeEach
-    public void setup() {
+    public void setup(TestInfo testInfo) {
+        System.out.println(testInfo.getDisplayName());
         Collections.addAll(numbers, 1, 2, 4, 5, 7, 6, 8, 3, 9, 10);
     }
 
@@ -43,7 +45,7 @@ public class Java9Features {
     }
 
     /**
-     * DropWhile: It does not process the elements which does not satisfy the condition.
+     * DropWhile: It does not process the elements which do not satisfy the condition.
      * Then starts to process the other elements regardless of conditions. That's why it processes 3 even it is smaller than 6.
      */
     @Test
