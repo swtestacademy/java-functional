@@ -1,7 +1,10 @@
 package java12to17.records;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 
 /**
  * Records reduce boilerplate code for classes that are simple data carriers.
@@ -11,6 +14,16 @@ import org.junit.jupiter.api.Test;
  * They always extend the Record class.
  */
 public class Records {
+    @BeforeEach
+    void setup(TestInfo testInfo) {
+        System.out.println(testInfo.getDisplayName());
+    }
+
+    @AfterEach
+    void teardown() {
+        System.out.println();
+    }
+
     /**
      * With below record declaration, we automatically define:
      * Private final fields for age, name, and team.

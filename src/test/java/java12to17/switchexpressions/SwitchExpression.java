@@ -15,7 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestMethodOrder;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -25,8 +24,7 @@ public class SwitchExpression {
     private Position               randomPosition;
 
     @BeforeEach
-    public void setup(TestInfo testInfo) {
-        if (!testInfo.getDisplayName().contains("repetition")) System.out.println("\nTest name: " + testInfo.getDisplayName());
+    public void setup() {
         positionMap.put(1, GOALKEEPER);
         positionMap.put(2, DEFENCE);
         positionMap.put(3, MIDFIELDER);
@@ -45,16 +43,16 @@ public class SwitchExpression {
     public void oldSwitchExpressionTest() {
         switch (randomPosition) {
             case GOALKEEPER:
-                System.out.println("Buffon");
+                System.out.println("Goal Keeper: Buffon");
                 break;
             case DEFENCE:
-                System.out.println("Ramos");
+                System.out.println("Defence: Ramos");
                 break;
             case MIDFIELDER:
-                System.out.println("Messi");
+                System.out.println("Midfielder: Messi");
                 break;
             case FORWARD:
-                System.out.println("Zlatan");
+                System.out.println("Forward: Zlatan");
                 break;
             default:
                 System.out.println("Please select a footballer from the BENCH!");
@@ -82,7 +80,7 @@ public class SwitchExpression {
     }
 
     /**
-     * If the right-hand side of a single case requires more code, it can be written inside a block, and the value returned using yield.
+     * If the right-hand side of a single case requires more code, it can be written inside a block, and the value is returned using yield.
      */
     @RepeatedTest(5)
     @Order(3)

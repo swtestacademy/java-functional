@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 
 public class TextBlocks {
     /**
-     * A text block is opened by three double quotes """ followed by a line break, and closed by three double-quotes.
+     * A text block can be declared by starting with three double quotes """ which should be followed by a line break and
+     * closed by three double quotes again.
      */
     @Test
     public void textBlocksTest() {
@@ -17,7 +18,7 @@ public class TextBlocks {
     }
 
     /**
-     * Trailing white space is removed from every line, which can be prevented by using the new escape sequence \s.
+     * We can make the same text one-liner with the "\" character. Let's see the example below.
      */
     @Test
     public void textBlocksNoLineBreaksTest() {
@@ -30,8 +31,7 @@ public class TextBlocks {
     }
 
     /**
-     * Inserting variables into a text block can be done as usual with the static method String::format,
-     * or with the new instance method String::formatted
+     * We can insert variables into a text block by using the static method String::format or with the String::formatted.
      */
     @Test
     public void textBlocksInsertingVariablesTest() {
