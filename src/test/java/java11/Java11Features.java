@@ -3,14 +3,18 @@ package java11;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.SneakyThrows;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestMethodOrder;
 
 /**
@@ -18,6 +22,16 @@ import org.junit.jupiter.api.TestMethodOrder;
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class Java11Features {
+    @BeforeEach
+    void setup(TestInfo testInfo) {
+        System.out.println(testInfo.getDisplayName());
+    }
+
+    @AfterEach
+    void teardown() {
+        System.out.println();
+    }
+
     @Test
     @Order(1)
     public void isBlankTest() {
@@ -47,7 +61,7 @@ public class Java11Features {
     @Order(3)
     public void stringRepeatTest() {
         String text = "Let's repeat!";
-        System.out.println(text.repeat(20));
+        System.out.println(text.repeat(3));
     }
 
     @Test
@@ -64,14 +78,15 @@ public class Java11Features {
     @Test
     @Order(5)
     public void filesAPITest() {
-        Path path = Paths.get(ClassLoader.getSystemResource("names.txt").getPath());
-        Files.writeString(path, "SW Test Academy");
+        Path path = Paths.get(ClassLoader.getSystemResource("onur.txt").getPath());
+        Files.writeString(path, "SW Test Academy", StandardOpenOption.WRITE, StandardOpenOption.SYNC);
+        System.out.println("The Content: " + Files.readString(path) );
         System.out.println(Files.readString(path).contains("SW Test Academy"));
     }
 
     @Test
     @Order(6)
-    public void optionalEmptyTest() {
+    public void optionalEmptyTest1() {
         var numbers = List.of(1, 2, 3, 4, 5, 6, 7);
 
         Optional<Integer> optionalNumber = numbers.stream()
@@ -91,6 +106,29 @@ public class Java11Features {
         } else {
             System.out.println("The number: " + optionalNumber.get());
         }
+    }
 
+    @Test
+    @Order(7)
+    public void optionalEmptyTest2() {
+        var numbers = List.of(1, 2, 3, 4, 5, 6, 7);
+
+        Optional<Integer> optionalNumber = numbers.stream()
+            .filter(number -> number > 7)
+            .findFirst();
+
+        //isPresent version
+        if (optionalNumber.isPresent()) {
+            System.out.println("The number: " + optionalNumber.get());
+        } else {
+            System.out.println("Number is not available!");
+        }
+
+        //isEmpty version
+        if (optionalNumber.isEmpty()) {
+            System.out.println("Number is not available!");
+        } else {
+            System.out.println("The number: " + optionalNumber.get());
+        }
     }
 }
