@@ -1,82 +1,91 @@
 package functional.stream.examples.brokenlinks;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class BrokenLinks {
     private WebDriver driver;
+    List<Integer> acceptedStatusCodeList = new ArrayList<>();
+    Predicate<String> isStatusCodeOk = link -> acceptedStatusCodeList.contains(HTTPConnectionUtil.getResponseCode(link));
 
     @BeforeEach
-    public void setup() {
+    public void setup(TestInfo testInfo) {
+        System.out.println("Test name: " + testInfo.getDisplayName());
         driver = new ChromeDriver();
         driver.get("https://www.swtestacademy.com");
+
+        //Filter the status codes
+        Collections.addAll(acceptedStatusCodeList, 200, 301, 302, 403);
     }
 
     @AfterEach
     public void tearDown() {
+        System.out.println("");
         driver.quit();
     }
 
     @Test
+    @Order(1)
     public void swTestAcademyHomePageBrokenLinksTest1() {
-        driver.findElements(By.tagName("a"))
-            .stream()
-            .parallel() //For parallel execution to process faster.
-            .limit(3) //Do the operation for first 3 elements.
-            .map(element -> element.getAttribute("href")) //Get the links.
-            .filter(link -> !link.isEmpty()) //Filter the non-empty links.
-            .distinct() //Remove duplicate links.
-            .forEach(link -> System.out.println("Response Code: " + HTTPConnectionUtil.getResponseCode(link) + " Link: " + link));
-    }
-
-    @Test
-    public void swTestAcademyHomePageBrokenLinksTest2() {
         long count = driver.findElements(By.tagName("a"))
             .stream()
             .parallel()
-            .limit(3)
             .map(element -> element.getAttribute("href"))
+            .filter(Objects::nonNull) ////filter the not null links.
             .filter(link -> !link.isEmpty()) //filter the non-empty links.
+            .filter(link -> !link.contains("javascript") && !link.contains("*&")) //Filter other link related patterns.
             .distinct() //remove duplicate links
-            .filter(link -> (HTTPConnectionUtil.getResponseCode(link) != 200 && HTTPConnectionUtil.getResponseCode(link) != 301))
-            .peek(link -> System.out.println("Link: " + link + " Response Code: " + HTTPConnectionUtil.getResponseCode(link)))
+            .filter(isStatusCodeOk.negate()) //Filter the Not Ok status codes
+            .peek(link -> System.out.println("Failed Link: " + link + " Response Code: " + HTTPConnectionUtil.getResponseCode(link)))
             .count();
 
+        System.out.println("Count: " + count);
         Assertions.assertFalse(count > 0);
     }
 
     @Test
-    public void swTestAcademyHomePageBrokenLinksTest3() {
+    public void swTestAcademyHomePageBrokenLinksTest2() {
         boolean result = driver.findElements(By.tagName("a"))
             .stream()
             .parallel()
-            .limit(3)
             .map(element -> element.getAttribute("href"))
+            .filter(Objects::nonNull) ////filter the not null links.
             .filter(link -> !link.isEmpty()) //filter the non-empty links.
+            .filter(link -> !link.contains("javascript") && !link.contains("*&")) //Filter other link related patterns.
             .distinct() //remove duplicate links
             .peek(link -> System.out.println("Link: " + link + " Response Code: " + HTTPConnectionUtil.getResponseCode(link)))
-            .anyMatch(link -> (HTTPConnectionUtil.getResponseCode(link) != 200 && HTTPConnectionUtil.getResponseCode(link) != 301));
+            .anyMatch(isStatusCodeOk.negate());
 
         Assertions.assertFalse(result);
     }
 
     @Test
-    public void swTestAcademyHomePageBrokenLinksTest4() {
+    public void swTestAcademyHomePageBrokenLinksTest3() {
         List<String> brokenLinkList = driver.findElements(By.tagName("a"))
             .stream()
             .parallel()
-            .limit(3)
             .map(element -> element.getAttribute("href"))
+            .filter(Objects::nonNull) ////filter the not null links.
             .filter(link -> !link.isEmpty()) //filter the non-empty links.
+            .filter(link -> !link.contains("javascript") && !link.contains("*&")) //Filter other link related patterns.
             .distinct() //remove duplicate links
-            .filter(link -> HTTPConnectionUtil.getResponseCode(link) != 200 && HTTPConnectionUtil.getResponseCode(link) != 301)
+            .filter(isStatusCodeOk.negate())
             .collect(Collectors.toList());
 
         Assertions.assertFalse(brokenLinkList.size() > 0, brokenLinkList.toString());
