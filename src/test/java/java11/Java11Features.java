@@ -113,22 +113,22 @@ public class Java11Features {
     public void optionalEmptyTest2() {
         var numbers = List.of(1, 2, 3, 4, 5, 6, 7);
 
-        Optional<Integer> optionalNumber = numbers.stream()
+        Optional<Integer> numbersGreaterThanSeven = numbers.stream()
             .filter(number -> number > 7)
             .findFirst();
 
         //isPresent version
-        if (optionalNumber.isPresent()) {
-            System.out.println("The number: " + optionalNumber.get());
+        if (numbersGreaterThanSeven.isPresent()) {
+            System.out.println("The number: " + numbersGreaterThanSeven.get());
         } else {
             System.out.println("Number is not available!");
         }
 
         //isEmpty version
-        if (optionalNumber.isEmpty()) {
+        if (numbersGreaterThanSeven.isEmpty()) {
             System.out.println("Number is not available!");
         } else {
-            System.out.println("The number: " + optionalNumber.get());
+            System.out.println("The number: " + numbersGreaterThanSeven.get());
         }
     }
 }
