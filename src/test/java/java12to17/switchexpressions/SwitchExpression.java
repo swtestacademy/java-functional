@@ -2,9 +2,9 @@ package java12to17.switchexpressions;
 
 import static java12to17.switchexpressions.Position.BENCH;
 import static java12to17.switchexpressions.Position.DEFENCE;
-import static java12to17.switchexpressions.Position.FORWARD;
 import static java12to17.switchexpressions.Position.GOALKEEPER;
 import static java12to17.switchexpressions.Position.MIDFIELDER;
+import static java12to17.switchexpressions.Position.STRIKER;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +28,7 @@ public class SwitchExpression {
         positionMap.put(1, GOALKEEPER);
         positionMap.put(2, DEFENCE);
         positionMap.put(3, MIDFIELDER);
-        positionMap.put(4, FORWARD);
+        positionMap.put(4, STRIKER);
         randomNumber = ThreadLocalRandom.current().nextInt(1, 6);
         randomPosition = Optional.ofNullable(positionMap.get(randomNumber)).orElse(BENCH);
     }
@@ -51,8 +51,8 @@ public class SwitchExpression {
             case MIDFIELDER:
                 System.out.println("Midfielder: Messi");
                 break;
-            case FORWARD:
-                System.out.println("Forward: Zlatan");
+            case STRIKER:
+                System.out.println("Striker: Zlatan");
                 break;
             default:
                 System.out.println("Please select a footballer from the BENCH!");
@@ -71,10 +71,10 @@ public class SwitchExpression {
     @Order(2)
     public void newSwitchExpressionTest() {
         switch (randomPosition) {
-            case GOALKEEPER -> System.out.println("Buffon");
-            case DEFENCE -> System.out.println("Ramos");
-            case MIDFIELDER -> System.out.println("Messi");
-            case FORWARD -> System.out.println("Zlatan");
+            case GOALKEEPER -> System.out.println("Goal Keeper: Buffon");
+            case DEFENCE -> System.out.println("Defence: Ramos");
+            case MIDFIELDER -> System.out.println("Midfielder: Messi");
+            case STRIKER -> System.out.println("Striker: Zlatan");
             default -> System.out.println("Please select a footballer from the BENCH!");
         }
     }
@@ -88,11 +88,11 @@ public class SwitchExpression {
         String footballer = switch (randomPosition) {
             case GOALKEEPER, DEFENCE -> {
                 System.out.println("Defensive Footballer Selection!");
-                yield "Ramos";
+                yield "Defence: Ramos";
             }
-            case MIDFIELDER, FORWARD -> {
+            case MIDFIELDER, STRIKER -> {
                 System.out.println("Offensive Footballer Selection!");
-                yield "Messi";
+                yield "Midfielder: Messi";
             }
             default -> "Please select a footballer from the BENCH!";
         };
