@@ -70,8 +70,8 @@ public class Java11Features {
         char c = '\u2002';
         String text = c + " SW TEST ACADEMY ";
 
-        System.out.println(text.trim()); //trim cannot trim unicode character.
-        System.out.println(text.strip()); //trim can trim unicode character.
+        System.out.println(text.trim()); //trim cannot remove unicode character.
+        System.out.println(text.strip()); //strip can remove unicode character.
     }
 
     @SneakyThrows
