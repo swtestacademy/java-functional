@@ -50,6 +50,7 @@ public class BrokenLinks {
             .filter(Objects::nonNull) ////filter the not null links.
             .filter(link -> !link.isEmpty()) //filter the non-empty links.
             .filter(link -> !link.contains("javascript") && !link.contains("*&")) //Filter other link related patterns.
+            .filter(link -> link.startsWith("http") || link.startsWith("https")) //Filter links started http and https.
             .distinct() //remove duplicate links
             .filter(isStatusCodeOk.negate()) //Filter the Not Ok status codes
             .peek(link -> System.out.println("Failed Link: " + link + " Response Code: " + HTTPConnectionUtil.getResponseCode(link)))
@@ -68,6 +69,7 @@ public class BrokenLinks {
             .filter(Objects::nonNull) ////filter the not null links.
             .filter(link -> !link.isEmpty()) //filter the non-empty links.
             .filter(link -> !link.contains("javascript") && !link.contains("*&")) //Filter other link related patterns.
+            .filter(link -> link.startsWith("http") || link.startsWith("https")) //Filter links started http and https.
             .distinct() //remove duplicate links
             .peek(link -> System.out.println("Link: " + link + " Response Code: " + HTTPConnectionUtil.getResponseCode(link)))
             .anyMatch(isStatusCodeOk.negate());
@@ -84,6 +86,7 @@ public class BrokenLinks {
             .filter(Objects::nonNull) ////filter the not null links.
             .filter(link -> !link.isEmpty()) //filter the non-empty links.
             .filter(link -> !link.contains("javascript") && !link.contains("*&")) //Filter other link related patterns.
+            .filter(link -> link.startsWith("http") || link.startsWith("https")) //Filter links started http and https.
             .distinct() //remove duplicate links
             .filter(isStatusCodeOk.negate())
             .collect(Collectors.toList());
